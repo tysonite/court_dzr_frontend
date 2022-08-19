@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AppHeader from './components/AppHeader'
 import analytics from './utils/analytics'
 import api from './utils/api'
-import sortByDate from './utils/sortByDate'
+// import sortByDate from './utils/sortByDate'
 import isLocalHost from './utils/isLocalHost'
 import './App.css'
 
@@ -35,6 +35,7 @@ export default class App extends Component {
   }
 
   renderCases() {
+    // eslint-disable-next-line
     const { cases: cases } = this.state
 
     if (!cases || !cases.length) {
@@ -55,7 +56,7 @@ export default class App extends Component {
         <div key={i} className='todo-item'>
           <label className="todo">
             <div className='todo-list-title'>
-              <a href={data.url} target="_blank">{data.name}</a>
+              <a href={data.url} target="_blank" rel="noopener noreferrer">{data.name}</a>
             </div>
           </label>
 

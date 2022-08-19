@@ -11,6 +11,7 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
+    "bootstrap": "netlify dev:exec node ./scripts/bootstrap-fauna-database.js",
     "start": "netlify dev",
     "prebuild": "npm run bootstrap",
     "build": "react-scripts build"

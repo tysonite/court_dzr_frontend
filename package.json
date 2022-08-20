@@ -8,12 +8,12 @@
     "faunadb": "^4.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "bootstrap": "netlify dev:exec node ./scripts/bootstrap-fauna-database.js",
     "start": "netlify dev",
-    "prebuild": "npm run bootstrap",
+    "prebuild": "echo 'setup faunaDB' && npm run bootstrap",
     "build": "react-scripts build"
   },
   "devDependencies": {

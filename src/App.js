@@ -27,7 +27,6 @@ export default class App extends Component {
         return false
       }
 
-      console.log('all cases', cases)
       this.setState({
         cases: cases
       })
@@ -52,6 +51,12 @@ export default class App extends Component {
 
       const { data } = case_item
 
+      const days_count = ((retrieval_time) => {
+        const last_update_date = new Date(parseInt(retrieval_time) * 1000);
+        const diff_days = Math.ceil((new Date().getTime() - last_update_date.getTime()) / (1000 * 3600 *24));
+        return 'Обновлено ' + (diff_days == 0 ? 'Сегодня' : (diff_days + ' дней назад'));
+      })(data.update_history[0].retrieval_time);
+
       return (
         <div key={i} className='todo-item'>
           <label className="todo">
@@ -60,7 +65,8 @@ export default class App extends Component {
             </div>
           </label>
 
-          {data.update_history[0].case_update_time}
+          <label><div>{data.update_history[0].case_update_time}</div></label>
+          <label><div>{days_count}</div></label>
         </div>
       )
     })

@@ -50,7 +50,10 @@ export default class App extends Component {
 
       const days_count = ((retrieval_time) => {
         const last_update_date = new Date(parseInt(retrieval_time) * 1000);
-        const diff_days = Math.ceil((new Date().getTime() - last_update_date.getTime()) / (1000 * 3600 *24));
+        const now_date = new Date()
+        last_update_date.setHours(24, 0, 0, 0)
+        now_date.setHours(24, 0, 0, 0)
+        const diff_days = Math.ceil((now_date.getTime() - last_update_date.getTime()) / (1000 * 3600 *24));
         return 'Обновлено ' + (diff_days == 0 ? 'Сегодня' : (diff_days + ' дней назад'));
       })(data.update_history[0].retrieval_time);
 

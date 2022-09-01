@@ -1,4 +1,5 @@
 import React from 'react'
+import { GoogleLogin } from '@react-oauth/google';
 import logo from '../../assets/logo.svg'
 import github from '../../assets/github.svg'
 import styles from './AppHeader.css' // eslint-disable-line
@@ -19,6 +20,16 @@ const AppHeader = (props) => {
           </div>
         </div>
         <div className='deploy-button-wrapper'>
+          <div className='login-form'>
+            <GoogleLogin
+              locale='ru_RU'
+              theme='filled_black'
+              useOneTap
+              auto_select
+              onSuccess={props.onLoginSuccess}
+              onError={props.onLoginError}
+            />
+          </div>
           <div className='view-src'>
             <a
               target='_blank'

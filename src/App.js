@@ -2,53 +2,50 @@ import React, { Component } from 'react'
 import AppHeader from './components/AppHeader'
 import analytics from './utils/analytics'
 import api from './utils/api'
-// import sortByDate from './utils/sortByDate'
 import isLocalHost from './utils/isLocalHost'
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 import './App.css'
+
 
 export default class App extends Component {
   state = {
+    isLoggedIn: false,
+    userName: 'Unknown User',
+    email: 'unknown@some.org',
     cases: []
   }
 
+  constructor(props) {
+    super(props)
+    this.onLoginSuccess = this.onLoginSuccess.bind(this)
+  }
+
   componentDidMount() {
-
     /* Track a page view */
-    analytics.page()
-
-    // Fetch all cases
-    api.readAll().then((cases) => {
-      if (cases.message === 'unauthorized') {
-        if (isLocalHost()) {
-          alert('FaunaDB key is not unauthorized. Make sure you set it in terminal session where you ran `npm start`. Visit http://bit.ly/set-fauna-key for more info')
-        } else {
-          alert('FaunaDB key is not unauthorized. Verify the key `FAUNADB_SERVER_SECRET` set in Netlify enviroment variables is correct')
-        }
-        return false
-      }
-
-      this.setState({
-        cases: cases
-      })
-    })
+    analytics.page();
   }
 
   renderCases() {
     // eslint-disable-next-line
-    const { cases: cases } = this.state
+    const {
+      cases: cases,
+      isLoggedIn: isLoggedIn
+    } = this.state;
 
     if (!cases || !cases.length) {
-      // Loading State here
-      return null
+      return (
+        <div>Нет отслеживаемых дел</div>
+      );
     }
 
-    // const timeStampKey = 'ts'
-    // const orderBy = 'desc' // or `asc`
-    // const sortOrder = sortByDate(timeStampKey, orderBy)
-    // const todosByDate = cases.sort(sortOrder)
+    if (!isLoggedIn) {
+      return (
+        <div>Не выполнен вход</div>
+      );
+    }
 
     return cases.map((case_item, i) => {
-
       const { data } = case_item
 
       const days_count = ((retrieval_time) => {
@@ -72,17 +69,58 @@ export default class App extends Component {
     })
   }
 
+  onLoginSuccess(credentialResponse) {
+    const responsePayload = jwt_decode(credentialResponse.credential);
+    const email = responsePayload.email;
+
+    /* Fetch all cases */
+    api.readAll(email).then((cases) => {
+      if (cases.name === 'Unauthorized') {
+        if (isLocalHost()) {
+          alert('FaunaDB key is not unauthorized. Make sure you set it in terminal session where you ran `npm start`. Visit http://bit.ly/set-fauna-key for more info')
+        } else {
+          alert('FaunaDB key is not unauthorized. Verify the key `FAUNADB_SERVER_SECRET` set in Netlify enviroment variables is correct')
+        }
+        return false;
+      }
+
+      this.setState({
+        cases: cases
+      });
+    });
+
+    this.setState({
+      isLoggedIn: true,
+      email: email,
+      userName: responsePayload.name,
+    });
+  }
+
+  onLoginError() {
+    this.setState({
+      isLoggedIn: false,
+      email: 'unknown@some.org',
+      userName: 'Unknown User',
+    });
+  }
+
+  renderHeader() {
+    return (
+      <AppHeader onLoginSuccess={this.onLoginSuccess} onLoginError={this.onLoginError} />
+    )
+  }
+
   render() {
     return (
-      <div className='app'>
+      <GoogleOAuthProvider clientId="228034351966-4j0t8iupfrv4jb0tljhpns9mpg4vb4h1.apps.googleusercontent.com">
+        <div className='app'>
+          {this.renderHeader()}
 
-        <AppHeader />
-
-        <div className='todo-list'>
-          {this.renderCases()}
+          <div className='todo-list'>
+            {this.renderCases()}
+          </div>
         </div>
-
-      </div>
+      </GoogleOAuthProvider>
     )
   }
 }

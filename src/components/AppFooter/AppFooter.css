@@ -1,0 +1,10 @@
+.app-footer{
+    background: #202020;
+    color: white;
+}
+.app-footer-content{
+    max-width: 1280px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 40px 20px 100px;
+}

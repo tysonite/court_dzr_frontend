@@ -1,114 +1,98 @@
-.todo-list {
-  padding: 60px;
-  padding-top: 10px;
-  width: 600px;
+a{
+  color: #2b85bd;
+  text-decoration: none;
 }
-.todo-settings-toggle {
-  fill: #b7b9bd;
-  width: 25px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-.todo-create-wrapper {
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-.todo-actions {
-  display: flex;
-  align-items: center;
-}
-.todo-create-input {
-  font-size: 14px;
-  padding: 11px 15px;
-  min-width: 300px;
-  display: inline-block;
-  box-shadow: 0px 0px 0px 2px rgba(120, 130, 152, 0.25);
-  border: none;
-  outline: none;
-  transition: all 0.3s ease;
-}
-.todo-create-input:hover, .todo-create-input:active, .todo-create-input:focus {
-  box-shadow: 0px 0px 0px 2px rgb(43, 190, 185);
-  box-shadow: 0px 0px 0px 2px #00ad9f;
+a:hover{
+  color: #fdd250;
 }
 
-.todo-item {
-  padding: 15px 0;
+.table-item {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 5px solid white;
+  font-size: 14px;
+}
+.table-item:hover{
+  background: #fffadd;
+}
+
+.table-message{
+  padding: 20px;
+  text-align: center;
+}
+#table-case-checkbox{
+  margin-right: 10px;
+}
+
+.table-list {
+  max-width: 1280px;
+  box-sizing: border-box;
+  margin: 20px auto;
+  background: #fffaea;
+}
+
+.table-head{
+  font-size: 14px;
+  font-weight: 600;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 43px;
+  border-bottom: 5px solid white;
+  background: #ffeebb;
 }
-.todo-list-title {
-  font-size: 17px;
-  font-weight: 500;
-  color: #5a5a5a;
-  flex-grow: 1;
-  position: relative;
-  z-index: 2;
-  margin-left: 45px;
-  width: 470px;
+
+.table-case_name{
+  min-width: 120px;
+  width: 240px;
 }
-/* .todo-list-title:hover span[contenteditable="false"]:before {
-  content: 'click to edit';
-  position: absolute;
-  top: -6px;
-  left: 11px;
-  font-size: 11px;
-  font-weight: 300;
-  color: #adadad;
-  letter-spacing: 1px;
-} */
-.mobile-toggle {
+.table-case-child{
+  width: 30px;
+  padding-right: 10px;
+}
+.table-case_number{
+  width: 200px;
+  padding-right: 20px;
+}
+.table-case_update_time{
+  width: 300px;
+  padding-right: 20px;
+}
+.table-case_result{
+  width: 240px;
+  padding-right: 20px;
+}
+.table-last_refresh{
+  width: 180px;
+  padding-right: 20px;
+}
+.table-head-extra{
+  display: flex;
+  align-items: center;
+  width: 80px;
+}
+.table-head-extra img{
+  max-width: 30px;
+  padding-left: 10px;
+}
+.table-list-mobile{
   display: none;
-}
-.desktop-toggle {
-  margin-left: 10px;
-  margin-bottom: 3px;
 }
 
 @media (max-width: 768px) {
-  .mobile-toggle {
-    display: inline-flex;
-  }
-  .desktop-toggle {
-    display: none;
-  }
-  .todo-list {
-    padding: 15px;
-    padding-top: 10px;
-    width: auto;
-  }
-  .todo-list h2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    max-width: 95%;
-  }
-  .todo-list-title {
-    /* Disable Auto Zoom in Input “Text” tag - Safari on iPhone */
-    font-size: 16px;
-    max-width: 80%;
-    margin-left: 40px;
-  }
-  .todo-create-wrapper {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 15px;
-  }
+
   .todo-create-input {
     appearance: none;
     border: 1px solid rgba(120, 130, 152, 0.25);
     /* Disable Auto Zoom in Input “Text” tag - Safari on iPhone */
-    font-size: 16px;
+    /* font-size: 16px; */
     margin-bottom: 15px;
     min-width: 85%;
   }
   .todo-item button {
     padding: 4px 12px;
-    font-size: 14px;
+    /* font-size: 14px; */
     margin-bottom: 0px;
     min-width: 63px;
     display: flex;
@@ -128,67 +112,78 @@
     color: #adadad;
     letter-spacing: 1px;
   }
+  .table-list{
+    display: none;
+  }
+
+  .table-list-mobile{
+    display: block;
+    background: #fffaea;
+  }
+  .table-item{
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .table-item label{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+  }
+
+  .table-case_name::before {
+    content: "Наименование"; 
+    display: flex;
+    font-weight: 600;
+    width: 120px;
+    min-width: 120px;
+    background: #ffeebb;
+    padding: 20px;
+    margin-right: 20px;
+  }
+  .table-case_number::before {
+    content: "Номер дела"; 
+    display: flex;
+    font-weight: 600;
+    width: 120px;
+    min-width: 120px;
+    background: #ffeebb;
+    padding: 20px;
+    margin-right: 20px;
+  }
+  .table-case_update_time::before {
+    content: "Дата публикации на сайте суда"; 
+    display: flex;
+    font-weight: 600;
+    width: 120px;
+    min-width: 120px;
+    background: #ffeebb;
+    padding: 20px;
+    margin-right: 20px;
+  }
+  .table-case_result::before {
+    content: "Опубликованный результат"; 
+    display: flex;
+    font-weight: 600;
+    width: 120px;
+    min-width: 120px;
+    background: #ffeebb;
+    padding: 20px;
+    margin-right: 20px;
+  }
+  .table-last_refresh::before {
+    content: "Последнее обновление"; 
+    display: flex;
+    font-weight: 600;
+    width: 120px;
+    min-width: 120px;
+    background: #ffeebb;
+    padding: 20px;
+    margin-right: 20px;
+  }
+
 }
 
 /** todo css via https://codepen.io/shshaw/pen/WXMdwE 😻 */
-.todo {
-  display: inline-block;
-  position: relative;
-  padding: 0;
-  margin: 0;
-  min-height: 40px;
-  min-width: 40px;
-  cursor: pointer;
-  padding-right: 5px;
-}
-.todo__state {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-}
 
-.todo__icon {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 280px;
-  height: 100%;
-  margin: auto;
-  fill: none;
-  stroke: #27FDC7;
-  stroke-width: 2;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  z-index: 1;
-}
-
-.todo__state:checked ~ .todo-list-title {
-  text-decoration: line-through;
-}
-
-.todo__box {
-  stroke-dasharray: 56.1053, 56.1053;
-  stroke-dashoffset: 0;
-  transition-delay: 0.16s;
-}
-.todo__check {
-  stroke: #27FDC7;
-  stroke-dasharray: 9.8995, 9.8995;
-  stroke-dashoffset: 9.8995;
-  transition-duration: 0.25s;
-}
-
-.todo__state:checked ~ .todo__icon .todo__box {
-  stroke-dashoffset: 56.1053;
-  transition-delay: 0s;
-  stroke-dasharray: 56.1053, 56.1053;
-  stroke-dashoffset: 0;
-  stroke: red;
-}
-
-.todo__state:checked ~ .todo__icon .todo__check {
-  stroke-dashoffset: 0;
-  transition-delay: 0s;
-}

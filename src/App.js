@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import AppHeader from './components/AppHeader'
+import AppFooter from './components/AppFooter'
+// import tableMobile from './components/AppTableMobile'
 import analytics from './utils/analytics'
 import api from './utils/api'
 import isLocalHost from './utils/isLocalHost'
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import arrow from './assets/arrow-down-right.svg'
+import details from './assets/details.svg'
+import attention from './assets/attention.png'
 import jwt_decode from "jwt-decode";
 import './App.css'
 
@@ -35,7 +40,7 @@ export default class App extends Component {
 
     if (!cases || !cases.length) {
       return (
-        <div>Нет отслеживаемых дел</div>
+        <div className='table-message'>Нет отслеживаемых дел</div>
       );
     }
 
@@ -58,15 +63,27 @@ export default class App extends Component {
       })(data.update_history[0].retrieval_time);
 
       return (
-        <div key={i} className='todo-item'>
-          <label className="todo">
-            <div className='todo-list-title'>
+        <div key={i} className='table-item'>
+          <label className="table-case_name">
+            <div>
+              {/* <img src={arrow} className='table-case-child'></img>   */}
+              <input type="checkbox" id="table-case-checkbox"/>
               <a href={data.url} target="_blank" rel="noopener noreferrer">{data.name}</a>
             </div>
           </label>
 
-          <label><div>{data.update_history[0].case_update_time}</div></label>
-          <label><div>{days_count}</div></label>
+          <label className='table-case_number'>{data.case_number}</label>
+
+          <label className='table-case_update_time'><div>{data.update_history[0].case_update_time}</div></label>
+
+          <label className='table-case_result'>{data.case_result}</label>
+
+          <label className='table-last_refresh'><div>{days_count}</div></label>
+
+          <label className='table-head-extra'>
+            <img src={details} alt="Подробнее" title="Подробнее"></img>
+            {/* <img src={attention}></img> */}
+          </label>
         </div>
       )
     })
@@ -113,15 +130,41 @@ export default class App extends Component {
     )
   }
 
+  // rendertableHeadMobile() {
+  //   return (
+  //     <tableMobile />
+  //   )
+  // }
+
+  renderFooter() {
+    return (
+      <AppFooter />
+    )
+  }
+
   render() {
     return (
       <GoogleOAuthProvider clientId="228034351966-4j0t8iupfrv4jb0tljhpns9mpg4vb4h1.apps.googleusercontent.com">
         <div className='app'>
           {this.renderHeader()}
 
-          <div className='todo-list'>
+          <div className="table-list">
+            <div className="table-head">
+              <label className='table-case_name'>Наименование</label>
+              <label className='table-case_number'>Номер дела</label>
+              <label className='table-case_update_time'>Дата публикации на сайте суда</label>
+              <label className='table-case_result'>Опубликованный результат</label>
+              <label className='table-last_refresh'>Последнее обновление</label>
+              <label className='table-head-extra'></label>
+            </div>
             {this.renderCases()}
           </div>
+
+          <div className="table-list-mobile">
+            {this.renderCases()}
+          </div>
+
+          {this.renderFooter()}
         </div>
       </GoogleOAuthProvider>
     )

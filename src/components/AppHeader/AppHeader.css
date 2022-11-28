@@ -3,6 +3,10 @@
   margin-right: 20px;
 }
 .app-title-wrapper {
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin: auto;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,10 +16,9 @@
 }
 .app-header {
   background-color: #222;
-  height: 105px;
-  padding: 20px;
+  /* height: 105px; */
+  /* padding: 20px; */
   color: white;
-  padding-left: 60px;
 }
 .app-left-nav {
   display: flex;

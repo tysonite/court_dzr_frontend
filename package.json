@@ -20,7 +20,7 @@
     "build": "react-scripts build"
   },
   "devDependencies": {
-    "netlify-cli": "^11.3.0"
+    "netlify-cli": "^12.5.0"
   },
   "browserslist": [
     ">0.2%",

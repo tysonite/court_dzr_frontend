@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@analytics/google-analytics": "^1.0.3",
+    "@analytics/google-analytics": "^1.0.5",
     "analytics": "^0.8.1",
     "faunadb": "^4.7.1",
     "react": "^18.2.0",

@@ -9,8 +9,7 @@
     "faunadb": "^4.7.1",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1"
+    "react-dom": "^18.2.0"
   },
   "scripts": {
     "test": "react-scripts test --watchAll=false",
@@ -20,7 +19,8 @@
     "build": "react-scripts build"
   },
   "devDependencies": {
-    "netlify-cli": "^12.7.2"
+    "netlify-cli": "^12.7.2",
+    "react-scripts": "^5.0.1"
   },
   "browserslist": [
     ">0.2%",

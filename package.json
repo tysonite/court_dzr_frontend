@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@analytics/google-analytics": "^1.0.5",
-    "@react-oauth/google": "^0.6.1",
+    "@react-oauth/google": "^0.7.0",
     "analytics": "^0.8.1",
     "faunadb": "^4.7.1",
     "jwt-decode": "^3.1.2",

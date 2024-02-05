@@ -19,7 +19,7 @@
     "build": "react-scripts build"
   },
   "devDependencies": {
-    "netlify-cli": "^17.15.3",
+    "netlify-cli": "^17.16.0",
     "react-scripts": "^5.0.1"
   },
   "browserslist": [
